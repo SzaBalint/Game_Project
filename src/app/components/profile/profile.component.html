@@ -1,0 +1,58 @@
+<mat-card>
+  <mat-card-title style="margin-bottom: 20px">
+    <b>{{username}}</b>-Profile settings
+  </mat-card-title>
+<mat-card-content>
+<form class="userForm" [formGroup]="usernameForm" (ngSubmit)="submitUsername()">
+  <p>
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input type="text" matInput formControlName="username">
+    </mat-form-field>
+  </p>
+
+  <p *ngIf="errorUsername" class="error">
+    {{ errorUsername }}
+  </p>
+  <p *ngIf="successUsername" class="success">
+    {{ successUsername }}
+  </p>
+
+  <div class="button">
+    <button type="submit" style="margin-top:180px" mat-button>Change username</button>
+  </div>
+</form>
+<form class="passwordForm" [formGroup]="passwordForm" (ngSubmit)="submitPassword()">
+  <p>
+    <mat-form-field>
+      <mat-label>Old password</mat-label>
+      <input type="password" matInput formControlName="oldPassword">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>New password</mat-label>
+      <input type="password" matInput formControlName="newPassword1">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>New password again</mat-label>
+      <input type="password" matInput formControlName="newPassword2">
+    </mat-form-field>
+  </p>
+
+  <p *ngIf="errorPassword" class="error">
+    {{ errorPassword }}
+  </p>
+  <p *ngIf="successPassword" class="success">
+    {{ successPassword }}
+  </p>
+
+  <div class="button">
+    <button type="submit" mat-button>Change password</button>
+  </div>
+
+</form>
+</mat-card-content>
+</mat-card>

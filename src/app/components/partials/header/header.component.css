@@ -1,0 +1,45 @@
+
+.toolbar{
+  background-color: black;
+  color:white;
+  display: flex; /* Use flexbox to align items */
+  justify-content: space-between; /* Distribute space between items */
+  align-items: center; /* Center items vertically */
+  padding: 0 15px;
+}
+
+a {
+  /* font-family: monospace; */
+  display:block;
+  text-align:center;
+  width: 250px;
+  text-decoration:none;
+  margin-right: 150px;
+}
+
+a:hover{
+  background: orange;
+  color: black;
+  cursor: pointer;
+}
+
+a.active{
+  background: orange;
+  color: black;
+}
+
+img{
+  scale: 22%;
+}
+.icon{
+  margin-top: 10px;
+  margin-right: 20px;
+  scale: 150%;
+  transition: all .2s ease-in-out;
+  cursor: pointer;
+}
+
+.icon:hover{
+  transform: scale(1.1);
+}
+

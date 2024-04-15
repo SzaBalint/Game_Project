@@ -1,0 +1,81 @@
+<div class="page">
+
+<div class="difficulty-container">
+  <p>
+    Choose the difficulty
+  </p>
+</div>
+<div class="difficulty-slider">
+  <!-- <label class="example-value-label">{{gameSize}}</label> -->
+    <mat-slider min="3" max="10" step="1" value="1">
+      <input (valueChange)="changeGameSize()" [(ngModel)]="gameSize" matSliderThumb >
+    </mat-slider>
+    <p class="difficulty-number">{{gameSize}}</p>
+</div>
+
+<mat-tab-group>
+  <mat-tab label="All results">
+    <table *ngIf="dataSourceAll" mat-table [dataSource]="dataSourceAll" matSort (matSortChange)="onSortChange($event)" class="mat-elevation-z8">
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> username </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="difficulty">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> difficulty </th>
+        <td mat-cell *matCellDef="let element"> {{element.difficulty}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> time </th>
+        <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-tab>
+  <mat-tab label="High scores">
+    <table *ngIf="dataSourceHigh" mat-table [dataSource]="dataSourceHigh" matSort (matSortChange)="onSortChange($event)" class="mat-elevation-z8">
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> username </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="difficulty">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> difficulty </th>
+        <td mat-cell *matCellDef="let element"> {{element.difficulty}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> time </th>
+        <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-tab>
+  <mat-tab label="Own result">
+    <table *ngIf="dataSourceOwn" mat-table [dataSource]="dataSourceOwn" matSort (matSortChange)="onSortChange($event)" class="mat-elevation-z8">
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> username </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="difficulty">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> difficulty </th>
+        <td mat-cell *matCellDef="let element"> {{element.difficulty}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> time </th>
+        <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-tab>
+</mat-tab-group>
+</div>

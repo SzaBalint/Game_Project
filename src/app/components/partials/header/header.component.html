@@ -1,0 +1,15 @@
+<mat-toolbar class="toolbar">
+  <span>
+    <img src="/assets/images/lightbulb2.jpeg">
+  </span>
+   <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/home" mat-button>Home</a>
+   <a routerLinkActive="active" routerLink="/results" mat-button>Results</a>
+   <a routerLinkActive="active" routerLink="/game" mat-button>Game</a>
+   <div class="icon">
+    <mat-icon (click)="profileClick()">account_circle</mat-icon>
+   </div>
+   <div class="icon">
+    <mat-icon (click)="logoutClick()">logout</mat-icon>
+   </div>
+ </mat-toolbar>
+

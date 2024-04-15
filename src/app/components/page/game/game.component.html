@@ -1,0 +1,65 @@
+<div class="container">
+<div>
+  <div class="timer-container">
+    <div class="timer">
+          <span>{{min}} : </span>
+          <span>{{sec}} : </span>
+          <span>{{ms}}</span>
+    </div>
+    <div class="button-container">
+        <button mat-raised-button (click)="start()">
+          {{startText}}
+          <i *ngIf="!running"></i>
+          <i *ngIf="running"></i>
+        </button>
+        <button style="margin-left:10px" mat-raised-button (click)="refresh()">
+          Reset
+        </button>
+        <button style="margin-left:10px" [disabled]="!isStarted" mat-raised-button (click)="stop()">Check</button>
+    </div>
+  </div>
+
+  <div class="difficulty-container">
+      <p>Choose the difficulty</p>
+  </div>
+  <div class="difficulty-slider">
+    <mat-slider [disabled]="isStarted" class="slider" min="3" max="10" step="1" value="1">
+      <input (valueChange)="changeGameSize($event)" [(ngModel)]="value" matSliderThumb >
+    </mat-slider>
+    <p class="difficulty-number">{{value}}</p>
+  </div>
+  <div class="difficulty-container">
+    <p style="color:red;font-weight:bold; font-size:30px" *ngIf="showNotCorrect" >Not correct!</p>
+  </div>
+
+</div>
+
+<div>
+  <div class="gametable">
+    <table [ngClass]="{
+      'is-not-started': !isStarted,
+      'is-started': isStarted,
+      'table-small': gameSize < 5,
+      'table-medium': gameSize >= 5 && gameSize < 7,
+      'table-large': gameSize >= 7 && gameSize < 9,
+      'table-huge': gameSize >= 9
+    }">
+      <tbody>
+        <tr>
+          <th class="non-bold" *ngFor="let number of topNumbersToShow">{{number}}</th>
+        </tr>
+        <tr *ngFor="let number of sideNumbers;index as i">
+          <td>{{number}}</td>
+          <td *ngFor="let n of numSequence(gameSize);index as y">
+            <mat-button-toggle [disabled]="!isStarted" id="{{i}}-{{y}}" class="correct" [checked]="buttonToggleStates[i][y]"
+            (change)="buttonToggleStates[i][y] = !buttonToggleStates[i][y]" [ngClass]="{' button-small': gameSize < 4, 'button-medium' : gameSize >= 5 && gameSize <= 7, 'button-large' : gameSize > 7 && gameSize < 9,'button-huge' : gameSize >=9}"></mat-button-toggle>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div>
+
+</div>
+</div>
