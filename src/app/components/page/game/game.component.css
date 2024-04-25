@@ -31,6 +31,13 @@ table {
   text-align: center;
 }
 
+.gameNumbers{
+  font-size: 120%;
+  text-align: center;
+  margin:0;
+}
+
+
 .non-bold {
   font-weight: normal;
 }
@@ -154,3 +161,7 @@ table,td,th{
   --mat-mdc-slider-hover-ripple-color: rgba(63, 81, 181, 0.05);
   --mat-mdc-slider-focus-ripple-color: rgba(63, 81, 181, 0.2);
 }
+
+
+
+

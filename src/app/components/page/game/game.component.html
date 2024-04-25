@@ -46,10 +46,10 @@
     }">
       <tbody>
         <tr>
-          <th class="non-bold" *ngFor="let number of topNumbersToShow">{{number}}</th>
+          <th class="non-bold" *ngFor="let number of topNumbersToShow; index as i"><p class="gameNumbers" *ngIf="i!=0">{{number}}</p></th>
         </tr>
         <tr *ngFor="let number of sideNumbers;index as i">
-          <td>{{number}}</td>
+          <td><p class="gameNumbers">{{number}}</p></td>
           <td *ngFor="let n of numSequence(gameSize);index as y">
             <mat-button-toggle [disabled]="!isStarted" id="{{i}}-{{y}}" class="correct" [checked]="buttonToggleStates[i][y]"
             (change)="buttonToggleStates[i][y] = !buttonToggleStates[i][y]" [ngClass]="{' button-small': gameSize < 4, 'button-medium' : gameSize >= 5 && gameSize <= 7, 'button-large' : gameSize > 7 && gameSize < 9,'button-huge' : gameSize >=9}"></mat-button-toggle>

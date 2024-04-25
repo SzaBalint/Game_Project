@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { GameService } from 'src/app/services/game.service';
 
-export interface Results {
+export interface Result {
   row: string;
   col: string;
   pressed: string | null;
@@ -62,47 +62,52 @@ export class GameComponent {
     console.log(this.sideNumbers);
   }
 
-
   generateTable() {
-    // Reset all data
     this.topNumbers = [];
     this.topNumbersToShow = [];
     this.sideNumbers = [];
 
-    // Reset button toggle states
     this.buttonToggleStates = [];
 
     let topNumbersSum = 0;
     let sideNumbersSum = 0;
+    let matrix: number[][] = [];
 
-    // Generate new random numbers for the top and side numbers
     for (let i = 0; i < this.gameSize; i++) {
-      let randomNumber = this.getRandomNumber(1, this.gameSize);
-      this.topNumbers.push(randomNumber);
-      topNumbersSum += randomNumber;
-    }
-
-    while (topNumbersSum !== sideNumbersSum) {
-      sideNumbersSum = 0;
-      this.sideNumbers = [];
-      for (let i = 0; i < this.gameSize; i++) {
-        let randomNumber = this.getRandomNumber(1, this.gameSize);
-        this.sideNumbers.push(randomNumber);
-        sideNumbersSum += randomNumber;
+      matrix[i] = [];
+      for (let j = 0; j < this.gameSize; j++) {
+        matrix[i][j] = this.getRandomNumber(0, 1);
       }
     }
 
-    // Initialize button toggle states
+    for (let i = 0; i < this.gameSize; i++) {
+      for (let j = 0; j < this.gameSize; j++) {
+        if(matrix[i][j]==1){
+          sideNumbersSum++;
+        }
+      }
+      this.sideNumbers.push(sideNumbersSum);
+      sideNumbersSum = 0;
+    }
+
+    for (let i = 0; i < this.gameSize; i++) {
+      for (let j = 0; j < this.gameSize; j++) {
+        if(matrix[j][i]==1){
+          topNumbersSum++;
+        }
+      }
+      this.topNumbers.push(topNumbersSum);
+      topNumbersSum = 0;
+    }
+
     this.resetButtonToggleState();
 
-    // Update top numbers
     this.topNumbers.unshift(0);
     this.topNumbersToShow = [...this.topNumbers];
     this.topNumbers.splice(0, 1);
   }
 
   resetButtonToggleState() {
-    // Reset button toggle states
     for (let i = 0; i < this.gameSize; i++) {
       this.buttonToggleStates[i] = Array(this.gameSize).fill(false);
     }
@@ -110,16 +115,14 @@ export class GameComponent {
 
   checkCorrect(){
     let buttons = document.getElementsByClassName("correct");
-    let corrects: Results[] = [];
+    let corrects: Result[] = [];
 
     Array.from(buttons).forEach(button => {
-      //console.log(button.children[0].ariaPressed);
-      let correct : Results = {
+      let correct : Result = {
         row: button.children[0].id.substring(0,1), //row and coloumn id
         col: button.children[0].id.substring(2,3),
         pressed: button.children[0].ariaPressed
       }
-      console.log(correct);
       corrects.push(correct);
     });
 
@@ -140,7 +143,6 @@ export class GameComponent {
         selectedSideSums[sideCount]+=1;
         sum++;
       }
-
       topCount++;
       if(topCount == this.gameSize){
         topCount = 0;
@@ -152,6 +154,7 @@ export class GameComponent {
     console.log(selectedTopSums);
     console.log(this.sideNumbers);
     console.log(selectedSideSums);
+
     let isWin;
     if(this.arraysAreEqual(this.topNumbers,selectedTopSums) && this.arraysAreEqual(this.sideNumbers,selectedSideSums)){
       isWin = true;
@@ -162,7 +165,6 @@ export class GameComponent {
         const username = JSON.parse(currentUser).username;
         const time = this.min + ":" + this.sec + ":" + this.ms;
         this.gameService.addScore(username,this.gameSize,time).subscribe(results=>{
-
         });
         this.openDialog(this.gameSize,time);
       }
@@ -176,22 +178,20 @@ export class GameComponent {
   }
 
   arraysAreEqual(arr1:number[], arr2:number[]) {
-    // Check if the arrays have the same length
     if (arr1.length !== arr2.length) {
         return false;
     }
-    // Iterate through each element and compare
     for (let i = 0; i < arr1.length; i++) {
         if (arr1[i] !== arr2[i]) {
             return false;
         }
     }
-    // If all elements are equal, return true
     return true;
 }
 
-  getRandomNumber(min:number, max:number):number {
-    return Math.floor(Math.random() * (max - min) + min);
+
+  getRandomNumber(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
 
@@ -240,12 +240,6 @@ export class GameComponent {
         }
       }, 10);
     }
-    // let buttons = document.getElementsByClassName("correct");
-
-    // Array.from(buttons).forEach(button => {
-    //   button.children[0].ariaPressed = "false";
-    //   button.classList.remove("mat-button-toggle-checked");
-    // });
   }
 
   refresh(){

@@ -40,10 +40,46 @@ th.mat-sort-header-sorted {
   --mdc-slider-focus-handle-color: black;
   --mdc-slider-hover-handle-color: black;
   --mdc-slider-active-track-color: orange;
-  --mdc-slider-inactive-track-color: #3f51b5;
+  --mdc-slider-inactive-track-color: gray;
   --mdc-slider-with-tick-marks-active-container-color: #fff;
-  --mdc-slider-with-tick-marks-inactive-container-color: #3f51b5;
+  --mdc-slider-with-tick-marks-inactive-container-color: gray;
   --mat-mdc-slider-ripple-color: orange;
   --mat-mdc-slider-hover-ripple-color: rgba(63, 81, 181, 0.05);
   --mat-mdc-slider-focus-ripple-color: rgba(63, 81, 181, 0.2);
 }
+
+::ng-deep .mat-mdc-tab-group, .mat-mdc-tab-nav-bar {
+  --mdc-tab-indicator-active-indicator-color: black;
+  --mat-tab-header-disabled-ripple-color: black;
+  --mat-tab-header-pagination-icon-color: black;
+  --mat-tab-header-inactive-label-text-color: black;
+  --mat-tab-header-active-label-text-color: black;
+  --mat-tab-header-active-ripple-color: black;
+  --mat-tab-header-inactive-ripple-color: black;
+  --mat-tab-header-inactive-focus-label-text-color: rgba(0, 0, 0, 0.6);
+  --mat-tab-header-inactive-hover-label-text-color: rgba(0, 0, 0, 0.6);
+  --mat-tab-header-active-focus-label-text-color: black;
+  --mat-tab-header-active-hover-label-text-color: black;
+  --mat-tab-header-active-focus-indicator-color: black;
+  --mat-tab-header-active-hover-indicator-color: black;
+}
+
+/* ::ng-deep .mat-tab-label {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: transparent;
+  color: red;
+  font-weight: 700;
+}
+
+::ng-deep .mat-tab-label.mat-tab-label-active {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: transparent;
+  color: red;
+  font-weight: 700;
+}
+
+::ng-deep .mat-ink-bar {
+  background-color: green;
+} */
